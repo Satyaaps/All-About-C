@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+void header(){
+	    printf("\t\t===========================================================\n");
+	    printf("\t\t|               Program Menghitung Angsuran               |\n");
+	    printf("\t\t|             Praktikum Algoritma Pemrograman             |\n");
+	    printf("\t\t|                        Kelompok 07                      |\n");
+	    printf("\t\t===========================================================\n");
+}
+
+void cover (){
+	    printf("\t\t===========================================================\n");
+	    printf("\t\t|               Program Menghitung Angsuran               |\n");
+	    printf("\t\t|             Praktikum Algoritma Pemrograman             |\n");
+	    printf("\t\t|                        Kelompok 07                      |\n");
+	    printf("\t\t===========================================================\n");
+	    printf("\t\t|Anggota kelompok :                     NIM :             |\n");
+	    printf("\t\t|=> Putu Gede Prayatna Dharma Parijata  => 2205551068     |\n");
+	    printf("\t\t|=> I Gde Teja Baskara                  => 2205551065     |\n");
+	    printf("\t\t|=> I Nyoman Michael Suputra            => 2205551056     |\n");
+	    printf("\t\t|=> Adriant Satrio Putra                => 2205551021     |\n");
+	    printf("\t\t|=> I Gede Satya Ariya Putra Sangjaya   => 2205551040     |\n");
+	    printf("\t\t|=> Made Abdy Arysada                   => 2205551043     |\n");
+	    printf("\t\t===========================================================\n");
+}
+
+int validasi(int *var){
+	char buff[1024];
+	char cek;
+	fflush(stdin);
+	if(fgets(buff, sizeof(buff), stdin) != NULL){
+		if(sscanf(buff, "%d %c", var, &cek) == 1) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+void revalidint(int *var, char *prompt){
+	while(1){
+		printf(prompt);
+		if(validasi(var))
+			break;
+		printf("\t\t Input salah! Silahkan coba lagi! \n");
+	}
+}
+
+int cekmengulang(char y, char n, char *prompt){
+    char cek;
+	while(1){
+		printf(prompt);
+		fflush(stdin);
+		scanf("%c", &cek);
+		if((cek=='y' || cek=='Y') || (cek=='n' || cek=='N')){
+			if (cek == 'y' || cek == 'Y'){
+				system("cls");
+			}
+			break;
+		}else{
+		printf("\t\t Input salah! Silahkan coba lagi! \n");
+		}
+	}
+	if(cek=='n' || cek=='N') return 0;
+	return 1;
+}
+
+void registrasi(){
+    int pinjaman; 
+    int waktu;    
+    int bungabulan;
+    int bungatahun;
+    int angsuranpokok;
+    int angsuranbulan;
+    int totalbunga = 0;
+    int totalangsuran = 0;
+    int i;
+
+    do{
+        system("cls");
+        printf("\t\t=========================================================================\n");
+	    printf("\t\t||                      Program Menghitung Angsuran                    ||\n");
+	    printf("\t\t||                    Praktikum Algoritma Pemrograman                  ||\n");
+	    printf("\t\t||                               Kelompok 07                           ||\n");
+        printf("\t\t=========================================================================\n");
+        revalidint(&pinjaman, "\t\tPokok Pinjaman (Rp) : ");
+        while(pinjaman<0){
+            printf("\t\tMasukkan Jumlah Yang Benar!\n");
+           revalidint(&pinjaman, "\t\tPokok Pinjaman (Rp) : \n");
+        }
+        revalidint(&bungatahun, "\t\tBesar Bunga (%%) : ");
+        while(bungatahun<0 || bungatahun>100){
+            printf("\t\tMasukkan Jumlah Yang Benar!\n");
+           revalidint(&bungatahun, "\t\tBesar Bunga (%%) : \n");
+        }
+
+        revalidint(&waktu, "\t\tLama Pinjaman (Bulan) : ");
+        while(waktu<=0){
+            printf("\t\tMasukkan Jumlah Yang Benar!\n");
+           revalidint(&waktu, "\t\tLama Pinjaman (Bulan) : \n");
+        }
+    
+        printf("\t\t=========================================================================\n");
+        printf("\t\t||  Bulan  ||   Bunga   ||   Angsuran Pokok   ||   Angsuran Perbulan   ||\n");
+        printf("\t\t=========================================================================\n");
+
+        for(i=1;i<=waktu;i++){
+        angsuranpokok = pinjaman / waktu;
+        bungabulan = (pinjaman - ((i-1) * angsuranpokok)) * bungatahun / 100 / 12;
+        angsuranbulan = bungabulan + angsuranpokok;
+        totalbunga += bungabulan;
+        totalangsuran += angsuranbulan;
+
+        printf("\t\t||    %d   ||   %d     ||    Rp.%d       ||      Rp.%d      ||\n", i, bungabulan, angsuranpokok, angsuranbulan);
+        }
+        printf("\t\t=========================================================================\n");
+        printf("\t\t||Total Bunga                                 : Rp.%d               ||\n", totalbunga);
+        printf("\t\t||Total Angsuran                              : Rp.%d             ||\n", totalangsuran);
+        printf("\t\t=========================================================================\n");
+        }
+        while (cekmengulang('y','n', "\t\tIngin Menghitung Lagi? (y/t) : \n"));
+}
+
+int main(){
+header();
+system("pause");
+system("cls");
+
+cover();
+system("pause");
+system("cls");
+
+registrasi();
+
+}
