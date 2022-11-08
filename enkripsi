@@ -1,0 +1,355 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void enkripsi(), dekripsi(), pilihan(), clear_screen();
+int revalidint();
+
+void header(){
+     system("cls||clear");
+	    printf("===========================================================\n");
+	    printf("|              Program Enkripsi dan Dekripsi              |\n");
+	    printf("|             Praktikum Algoritma Pemrograman             |\n");
+	    printf("|                        Kelompok 07                      |\n");
+	    printf("===========================================================\n");
+}
+
+void cover (){
+	    printf("===========================================================\n");
+	    printf("|               Program Menghitung Angsuran               |\n");
+	    printf("|             Praktikum Algoritma Pemrograman             |\n");
+	    printf("|                        Kelompok 07                      |\n");
+	    printf("===========================================================\n");
+	    printf("|Anggota kelompok :                     NIM :             |\n");
+	    printf("|=> Putu Gede Prayatna Dharma Parijata  => 2205551068     |\n");
+	    printf("|=> I Gde Teja Baskara                  => 2205551065     |\n");
+	    printf("|=> I Nyoman Michael Suputra            => 2205551056     |\n");
+	    printf("|=> Adriant Satrio Putra                => 2205551021     |\n");
+	    printf("|=> I Gede Satya Ariya Putra Sangjaya   => 2205551040     |\n");
+	    printf("|=> Made Abdy Arysada                   => 2205551043     |\n");
+	    printf("===========================================================\n");
+}
+
+int validasi(int *var){
+	char buff[1024];
+	char cek;
+	fflush(stdin);
+	if(fgets(buff, sizeof(buff), stdin) != NULL){ 
+		if(sscanf(buff, "%d %c", var, &cek) == 1) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int revalidint(int *var, char *prompt){ 
+	while(1){
+		printf(prompt);
+		if(validasi(var)) 
+			break; 
+		printf("Input salah! Silahkan coba lagi! \n"); 
+	}
+}
+
+int cekmengulang(char y, char n, char *prompt){ 
+    char cek;
+	while(1){
+		printf(prompt); 
+		fflush(stdin);
+		scanf("%c", &cek);
+		if((cek=='y' || cek=='Y') || (cek=='t' || cek=='T')){ 
+			if (cek == 'y' || cek == 'Y'){ 
+				pilihan();
+                 system("cls||clear");
+			}
+			break;
+		}else{ 
+		printf("Input salah! Silahkan coba lagi! \n"); 
+		}
+	}
+	if(cek=='t' || cek=='T'){
+     system("cls||clear");
+    printf("Thanks");
+    return 0;
+    }
+	return 1;
+}
+
+void pilihan(){
+    int pilih;
+         system("cls||clear");
+	    printf("===========================================================\n");
+	    printf("|              Program Enkripsi dan Dekripsi              |\n");
+	    printf("|             Praktikum Algoritma Pemrograman             |\n");
+	    printf("|                        Kelompok 07                      |\n");
+	    printf("===========================================================\n");
+        printf("|                                                         |\n");
+        printf("|  1.  Enkripsi Kalimat (dari Plaintext)                  |\n");
+        printf("|  2.  Dekripsi Kalimat (dari Chiphertext)                |\n");     
+        printf("|                                                0. keluar|\n");
+        printf("===========================================================\n");
+        printf("| >> "); scanf("%d", &pilih);
+
+        if(pilih == 1){
+            enkripsi();
+        }
+        else if(pilih == 2){
+            dekripsi();
+        }
+        else if(pilih == 0){
+			exit(0);
+        }
+        else{
+				printf("\n==============================");
+				printf("\n|     Silahkan menginput     |");
+				printf("\n|      data yang benar       |");
+				printf("\n==============================");
+		}   
+}     
+
+void enkripsi(){
+
+    char plaintext[26], ciphertext[26], input[255];
+    char hasil, panjangtext, pergeseran;
+    int i, j, k, l;
+    int status = 0, kondisi = 0, varawal = 0, varsel = 0;
+
+    do{
+         system("cls||clear");
+	    printf("===========================================================\n");
+	    printf("|              Program Enkripsi dan Dekripsi              |\n");
+	    printf("|             Praktikum Algoritma Pemrograman             |\n");
+	    printf("|                        Kelompok 07                      |\n");
+	    printf("===========================================================\n");
+
+        revalidint(&pergeseran, "\nMasukkan Jumlah Pergeseran: ");
+
+        printf("\nPlainText  : ");
+        for (i = 0; i < 26; i++){
+            plaintext[i] = 'a' + i;
+            ciphertext[i] = 'A' + i;
+            printf("%c ", plaintext[i]);
+        }
+
+        printf("\n\t     v");
+
+        if(pergeseran > 0){
+            for(j = 0; j < pergeseran; j++){
+                hasil = ciphertext[0];
+                for(l = 0; l < 26; l++){
+                    ciphertext[l] = ciphertext[l + 1];
+                }
+                ciphertext[25] = hasil;
+            }
+        }else if(pergeseran < 0){
+            for(j = 0; j > pergeseran; j--){
+                hasil = ciphertext[25];
+                for(l = 25; l >= 0; l--){
+                    ciphertext[l] = ciphertext[l - 1];
+                }
+                ciphertext[0] = hasil;
+            }
+        }
+        printf("\nCipherText : ");
+        for (i = 0; i < 26; i++){
+            printf("%c ", ciphertext[i]);
+        }
+        printf("\n\n===========================================================");
+
+        printf("\n\nText Yang Ingin Dienkripsi : ");
+        scanf("%[^\n]", &input);
+        fflush(stdin);
+        varawal = 0;
+        while (varawal == 0){
+            if (input[0] == ' '){
+   		        printf("\nInput salah! Silahkan coba lagi! ");
+                scanf("%[^\n]", &input);
+                fflush(stdin);
+            }else{
+                varawal = 1;
+            }
+        }
+        panjangtext = strlen(input);
+
+        while (status == 0){
+            for(i = 0; i < panjangtext; i++){
+                if(input[i] == ' '){
+                    kondisi = 0;
+                }else if(input[i] > 122 || input[i] < 65){
+                    kondisi = kondisi + 1;
+                }
+            }
+            if(kondisi > 0){
+		        printf("\nInput salah! Silahkan coba lagi! ");
+                scanf("%[^\n]", &input);
+                fflush(stdin);
+                varsel = 0;
+                while (varsel == 0){
+                    if (input[0] == ' '){
+        		        printf("\nInput salah! Silahkan coba lagi! ");
+                        scanf("%[^\n]", &input);
+                        fflush(stdin);
+                    }else{
+                        varsel = 1;
+                    }
+                }
+                panjangtext = strlen(input);
+                kondisi = 0;
+                for(i = 0; i < panjangtext; i++){
+                    if(input[i] == ' '){
+                        kondisi = 0;
+                    }else if(input[i] > 122 || input[i] < 65){
+                        kondisi = kondisi + 1;
+                    }else{
+                        kondisi = 0;
+                    }
+                }
+            }else{
+                status = 1;
+            }
+        }
+        strupr(input);
+        printf("\nHasil Enkripsi\t\t   : ");
+
+        for(i = 0; i < panjangtext; i++){
+            if(input[i] == ' '){
+                printf(" ");
+            }else{
+                k = input[i] - 65;
+                printf("%c", ciphertext[k]);
+                
+            }
+        }printf("\n\n===========================================================");
+        }while(cekmengulang('y','t', "\n\nApakah Anda Ingin Melakukan Enkripsi Kembali? (y/t) : "));
+}
+
+void dekripsi(){
+
+    char plaintext[26], ciphertext[26], input[255];
+    char hasil, panjangtext, pergeseran;
+    int i, j, l;
+    int status = 0, kondisi = 0, varawal = 0, varsel = 0;
+
+    do{
+        system("cls||clear");
+	    printf("===========================================================\n");
+	    printf("|              Program Enkripsi dan Dekripsi              |\n");
+	    printf("|             Praktikum Algoritma Pemrograman             |\n");
+	    printf("|                        Kelompok 07                      |\n");
+	    printf("===========================================================\n");
+
+        revalidint(&pergeseran, "\nMasukkan Jumlah Pergeseran: ");
+
+        printf("\nPlainText  : ");
+        for (i = 0; i < 26; i++){
+            plaintext[i] = 'a' + i;
+            ciphertext[i] = 'A' + i;
+            printf("%c ", plaintext[i]);
+        }
+
+        printf("\n\t     v");
+
+        if(pergeseran > 0){
+            for(j = 0; j < pergeseran; j++){
+                hasil = ciphertext[0];
+                for(l = 0; l < 26; l++){
+                    ciphertext[l] = ciphertext[l + 1];
+                }
+                ciphertext[25] = hasil;
+            }
+        }else if(pergeseran < 0){
+            for(j = 0; j > pergeseran; j--){
+                hasil = ciphertext[25];
+                for(l = 25; l >= 0; l--){
+                    ciphertext[l] = ciphertext[l - 1];
+                }
+                ciphertext[0] = hasil;
+            }
+        }
+        printf("\nCipherText : ");
+        for (i = 0; i < 26; i++){
+            printf("%c ", ciphertext[i]);
+        }
+        printf("\n\n===========================================================");
+
+        printf("\n\nText Yang Ingin Dienkripsi : ");
+        scanf("%[^\n]", &input);
+        fflush(stdin);
+        varawal = 0;
+        while (varawal == 0){
+            if (input[0] == ' '){
+   		        printf("Input salah! Silahkan coba lagi! \n");
+                scanf("%[^\n]", &input);
+                fflush(stdin);
+            }else{
+                varawal = 1;
+            }
+        }
+        strupr(input);
+        panjangtext = strlen(input);
+
+        while (status == 0){
+            for(i = 0; i < panjangtext; i++){
+                if(input[i] == ' '){
+                    kondisi = 0;
+                }else if(input[i] > 122 || input[i] < 65){
+                    kondisi = kondisi + 1;
+                }else{
+                    kondisi = 0;
+                }
+            }
+            if(kondisi > 0){
+   		        printf("Input salah! Silahkan coba lagi! \n");
+                scanf("%[^\n]", &input);
+                fflush(stdin);
+                varsel = 0;
+                while (varsel == 0){
+                    if (input[0] == ' '){
+   		        printf("Input salah! Silahkan coba lagi! \n");
+                        scanf("%[^\n]", &input);
+                        fflush(stdin);
+                    }else{
+                        varsel = 1;
+                    }
+                }
+                panjangtext = strlen(input);
+                kondisi = 0;
+                for(i = 0; i < panjangtext; i++){
+                    if(input[i] == ' '){
+                        kondisi = 0;
+                    }else if(input[i] > 122 || input[i] < 65){
+                        kondisi = kondisi + 1;
+                    }
+            }
+            }else{
+                status = 1;
+            }
+        }
+
+        printf("\nHasil Enkripsi\t\t   : ");
+
+        for(i = 0; i < panjangtext; i++){
+            if(input[i] == ' '){
+                printf(" ");
+            }else{
+                j = 0;
+                while(input[i] != ciphertext[j]){
+                    j++;
+                }
+                printf("%c", plaintext[j]);
+            }
+        }printf("\n\n===========================================================");
+        }while(cekmengulang('y','t', "\n\nApakah Anda Ingin Melakukan Enkripsi Kembali? (y/t) : "));
+    }
+
+int main(){
+	header();
+	system("pause"); 
+	 system("cls||clear");
+
+	cover();
+	system("pause");
+	 system("cls||clear");
+
+	pilihan();
+}
