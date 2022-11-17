@@ -18,15 +18,15 @@ void cover (){
 	printf("===========================================================\n");
 	printf("|               Program Menghitung Angsuran               |\n");
 	printf("|                        Kelompok 07                      |\n");
-    printf("===========================================================\n");
-    printf("|Anggota kelompok :                     NIM :             |\n");
-    printf("|=> Putu Gede Prayatna Dharma Parijata  => 2205551068     |\n");
-    printf("|=> I Gde Teja Baskara                  => 2205551065     |\n");
-    printf("|=> I Nyoman Michael Suputra            => 2205551056     |\n");
-    printf("|=> Adriant Satrio Putra                => 2205551021     |\n");
-    printf("|=> I Gede Satya Ariya Putra Sangjaya   => 2205551040     |\n");
-    printf("|=> Made Abdy Arysada                   => 2205551043     |\n");
-    printf("===========================================================\n");
+    	printf("===========================================================\n");
+    	printf("|Anggota kelompok :                     NIM :             |\n");
+    	printf("|=> Putu Gede Prayatna Dharma Parijata  => 2205551068     |\n");
+    	printf("|=> I Gde Teja Baskara                  => 2205551065     |\n");
+    	printf("|=> I Nyoman Michael Suputra            => 2205551056     |\n");
+    	printf("|=> Adriant Satrio Putra                => 2205551021     |\n");
+    	printf("|=> I Gede Satya Ariya Putra Sangjaya   => 2205551040     |\n");
+    	printf("|=> Made Abdy Arysada                   => 2205551043     |\n");
+    	printf("===========================================================\n");
 }
 
 int validasi(int *var){
@@ -85,16 +85,16 @@ void cekpilihan(int *var, int pilih1, int pilih2, char *prompt){
 void pilihan(){
     int pilih;
         system("cls||clear");
-	    printf("===========================================================\n");
-	    printf("|              Program Enkripsi dan Dekripsi              |\n");
-	    printf("|             Praktikum Algoritma Pemrograman             |\n");
-	    printf("|                        Kelompok 07                      |\n");
-	    printf("===========================================================\n");
-        printf("|                                                         |\n");
-        printf("|  1.  Enkripsi Kalimat (dari Plaintext)                  |\n");
-        printf("|  2.  Dekripsi Kalimat (dari Chiphertext)                |\n");     
-        printf("|                                                0. keluar|\n");
-        printf("===========================================================\n");
+	printf("===========================================================\n");
+	printf("|              Program Enkripsi dan Dekripsi              |\n");
+	printf("|             Praktikum Algoritma Pemrograman             |\n");
+	printf("|                        Kelompok 07                      |\n");
+	printf("===========================================================\n");
+	printf("|                                                         |\n");
+       	printf("|  1.  Enkripsi Kalimat (dari Plaintext)                  |\n");
+       	printf("|  2.  Dekripsi Kalimat (dari Chiphertext)                |\n");     
+       	printf("|                                                0. keluar|\n");
+       	printf("===========================================================\n");
         cekpilihan(&pilih, 1, 3, "| >> ");
 
         if(pilih == 1){
