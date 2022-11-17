@@ -6,28 +6,27 @@ void enkripsi(), dekripsi(), pilihan(), clear_screen();
 int revalidint();
 
 void header(){
-     system("cls||clear");
-	    printf("===========================================================\n");
-	    printf("|              Program Enkripsi dan Dekripsi              |\n");
-	    printf("|             Praktikum Algoritma Pemrograman             |\n");
-	    printf("|                        Kelompok 07                      |\n");
-	    printf("===========================================================\n");
+    system("cls||clear");
+	printf("===========================================================\n");
+	printf("|              Program Enkripsi dan Dekripsi              |\n");
+	printf("|             Praktikum Algoritma Pemrograman             |\n");
+	printf("|                        Kelompok 07                      |\n");
+	printf("===========================================================\n");
 }
 
 void cover (){
-	    printf("===========================================================\n");
-	    printf("|               Program Menghitung Angsuran               |\n");
-	    printf("|             Praktikum Algoritma Pemrograman             |\n");
-	    printf("|                        Kelompok 07                      |\n");
-	    printf("===========================================================\n");
-	    printf("|Anggota kelompok :                     NIM :             |\n");
-	    printf("|=> Putu Gede Prayatna Dharma Parijata  => 2205551068     |\n");
-	    printf("|=> I Gde Teja Baskara                  => 2205551065     |\n");
-	    printf("|=> I Nyoman Michael Suputra            => 2205551056     |\n");
-	    printf("|=> Adriant Satrio Putra                => 2205551021     |\n");
-	    printf("|=> I Gede Satya Ariya Putra Sangjaya   => 2205551040     |\n");
-	    printf("|=> Made Abdy Arysada                   => 2205551043     |\n");
-	    printf("===========================================================\n");
+	printf("===========================================================\n");
+	printf("|               Program Menghitung Angsuran               |\n");
+	printf("|                        Kelompok 07                      |\n");
+    printf("===========================================================\n");
+    printf("|Anggota kelompok :                     NIM :             |\n");
+    printf("|=> Putu Gede Prayatna Dharma Parijata  => 2205551068     |\n");
+    printf("|=> I Gde Teja Baskara                  => 2205551065     |\n");
+    printf("|=> I Nyoman Michael Suputra            => 2205551056     |\n");
+    printf("|=> Adriant Satrio Putra                => 2205551021     |\n");
+    printf("|=> I Gede Satya Ariya Putra Sangjaya   => 2205551040     |\n");
+    printf("|=> Made Abdy Arysada                   => 2205551043     |\n");
+    printf("===========================================================\n");
 }
 
 int validasi(int *var){
@@ -68,16 +67,24 @@ int cekmengulang(char y, char n, char *prompt){
 		}
 	}
 	if(cek=='t' || cek=='T'){
-     system("cls||clear");
+    system("cls||clear");
     printf("Thanks");
-    return 0;
+    exit(0);
     }
-	return 1;
+}
+
+void cekpilihan(int *var, int pilih1, int pilih2, char *prompt){
+	while(1){
+		revalidint(var, prompt);
+		if(*var >= pilih1  && *var <= pilih2)
+			break;
+		printf("Input salah! Silahkan coba lagi! \n"); 
+	}
 }
 
 void pilihan(){
     int pilih;
-         system("cls||clear");
+        system("cls||clear");
 	    printf("===========================================================\n");
 	    printf("|              Program Enkripsi dan Dekripsi              |\n");
 	    printf("|             Praktikum Algoritma Pemrograman             |\n");
@@ -88,7 +95,7 @@ void pilihan(){
         printf("|  2.  Dekripsi Kalimat (dari Chiphertext)                |\n");     
         printf("|                                                0. keluar|\n");
         printf("===========================================================\n");
-        printf("| >> "); scanf("%d", &pilih);
+        cekpilihan(&pilih, 1, 3, "| >> ");
 
         if(pilih == 1){
             enkripsi();
@@ -99,12 +106,10 @@ void pilihan(){
         else if(pilih == 0){
 			exit(0);
         }
-        else{
-				printf("\n==============================");
-				printf("\n|     Silahkan menginput     |");
-				printf("\n|      data yang benar       |");
-				printf("\n==============================");
-		}   
+        else(pilih > 2);{
+            printf("Input salah! Silahkan coba lagi! \n");
+            pilihan();
+        }
 }     
 
 void enkripsi(){
@@ -115,7 +120,7 @@ void enkripsi(){
     int status = 0, kondisi = 0, varawal = 0, varsel = 0;
 
     do{
-         system("cls||clear");
+        system("cls||clear");
 	    printf("===========================================================\n");
 	    printf("|              Program Enkripsi dan Dekripsi              |\n");
 	    printf("|             Praktikum Algoritma Pemrograman             |\n");
@@ -345,11 +350,11 @@ void dekripsi(){
 int main(){
 	header();
 	system("pause"); 
-	 system("cls||clear");
+	system("cls||clear");
 
 	cover();
 	system("pause");
-	 system("cls||clear");
+	system("cls||clear");
 
 	pilihan();
 }
